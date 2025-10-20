@@ -1,105 +1,86 @@
 <!DOCTYPE html>
-</svg>
-<div class="big" style="margin-top:6px;">123</div>
-<div class="subtle">Total actions in period</div>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Campaign Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" aria-label="Sidebar">
+<div class="brand">
+<div class="logo">+</div>
+<div class="name">Logo</div>
 </div>
 
 
-<div class="chipset">
-<div class="card" style="background:var(--panel-2);">
-<div class="label">Campaign</div>
-<div class="value">Q4 Awareness</div>
-</div>
-<div class="card" style="background:var(--panel-2);">
-<div class="label">Engagement</div>
-<div class="value">High</div>
-</div>
-<div class="card" style="background:var(--panel-2);">
-<div class="label">Budget spent</div>
-<div class="value">$3,000</div>
-</div>
-<div class="card" style="background:var(--panel-2);">
-<div class="label">Top channel</div>
-<div class="value">Social Media</div>
-</div>
-</div>
-</div>
-</div>
-
-
-<div class="card">
-<div class="pageTitle" style="font-size:18px;">Collaboration Hub</div>
-<div class="chat" style="margin-top:10px;">
-<div style="display:flex; align-items:center; gap:10px;">
-<div class="avatar" style="width:36px;height:36px;">M</div>
-<input class="input" placeholder="Type a message…" />
-</div>
-<div class="tag">📄 Marketing Plan.pdf</div>
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-<select class="select"><option>Assign to</option><option>Sophia</option><option>Maria</option></select>
-<select class="select"><option>Deadline</option><option>Today</option><option>This week</option><option>This month</option></select>
-</div>
-</div>
-</div>
-</section>
-
-
-<!-- Bottom row: Briefs, Analytics, Activity -->
-<section class="grid row2" style="margin-top:16px;">
-<div class="card">
-<div class="pageTitle" style="font-size:18px;">Project Briefs</div>
-<div class="list" style="margin-top:8px;">
-<div class="row"><span>Client A</span><a class="link" href="#">Use template</a></div>
-<div class="row"><span>Client B</span><a class="link" href="#">Use template</a></div>
-<div class="row"><span>Client C</span><a class="link" href="#">Use template</a></div>
-</div>
-</div>
-
-
-<div class="card">
-<div class="pageTitle" style="font-size:18px;">Analytics Snapshot</div>
-<div class="charts" style="margin-top:10px;">
-<div class="donut" aria-hidden="true"></div>
+<div class="userCard">
+<div class="avatar" aria-hidden="true">S</div>
 <div>
-<div class="value">7%</div>
-<div class="subtle">Top creative • Audience</div>
-<div class="legend" style="margin-top:10px;">Channel mix</div>
-<div class="bars" style="margin-top:8px;">
-<div class="bar" style="height: 22px"></div>
-<div class="bar" style="height: 68px"></div>
-<div class="bar" style="height: 40px"></div>
-<div class="bar" style="height: 58px"></div>
-<div class="bar" style="height: 28px"></div>
-</div>
-</div>
+<div class="name">Sophia</div>
+<div class="title">Marketing Specialist · Makari</div>
 </div>
 </div>
 
 
-<div class="card">
-<div class="pageTitle" style="font-size:18px;">Activity feed</div>
-<div class="spark" style="margin-top:12px;">
-<div class="b" style="height:28px"></div>
-<div class="b" style="height:60px"></div>
-<div class="b" style="height:36px"></div>
-<div class="b" style="height:72px"></div>
-<div class="b" style="height:48px"></div>
-<div class="b" style="height:65px"></div>
-<div class="b" style="height:42px"></div>
-<div class="b" style="height:55px"></div>
+<nav>
+<div class="navSection">Menu</div>
+<ul>
+<li><a class="active" href="#"><span>🏠</span> <span>Dashboard</span></a></li>
+<li><a href="#"><span>📝</span> <span>Briefs</span></a></li>
+<li><a href="#"><span>📈</span> <span>Analytics</span></a></li>
+<li><a href="#"><span>🤝</span> <span>Collaboration</span></a></li>
+<li><a href="#"><span>✅</span> <span>Tasks</span></a></li>
+<li><a href="#"><span>📚</span> <span>Templates</span></a></li>
+<li><a href="#"><span>⚙️</span> <span>Settings</span></a></li>
+</ul>
+</nav>
+</aside>
+
+
+<header class="topbar">
+<div class="pageTitle">Campaign Dashboard</div>
+<div class="actions">
+<button class="btn" title="Notifications">🔔</button>
+<button class="btn primary">Create New Campaign</button>
 </div>
+</header>
+
+
+<main>
+<!-- Stat cards -->
+<section class="grid stats" aria-label="KPI Cards">
+<div class="card stat">
+<div class="label">Impressions</div>
+<div class="value">12,345</div>
+<div class="delta up">▲ 12%</div>
+</div>
+<div class="card stat">
+<div class="label">Clicks</div>
+<div class="value">1,234</div>
+<div class="delta up">▲ 8%</div>
+</div>
+<div class="card stat">
+<div class="label">CTR</div>
+<div class="value">10%</div>
+<div class="delta down">▼ 5%</div>
+</div>
+<div class="card stat">
+<div class="label">Conversions</div>
+<div class="value">123</div>
+<div class="delta up">▲ 6%</div>
 </div>
 </section>
-</main>
-</div>
 
 
-<!-- Optional tiny script for keyboard focus visuals only -->
-<script>
-// Improve :focus-visible on buttons/inputs for keyboard users
-document.addEventListener('keydown', (e) => {
-if (e.key === 'Tab') document.body.classList.add('using-keyboard');
-});
-</script>
-</body>
+<!-- Overview + Collaboration side card -->
+<section class="grid panels" style="margin-top:16px;">
+<div class="card">
+<div class="kv">
+<div>
+<div class="pageTitle small">Campaign Overview</div>
 </html>
