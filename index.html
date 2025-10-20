@@ -1,149 +1,290 @@
+<!-- Updated midnight black theme applied across entire dashboard -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Campaign Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
---bg: #000000;
---panel: #0d0d0d;
---panel-2: #1a1a1a;
---text: #f5f5f5;
---muted: #aaaaaa;
---accent: #26c6da;
---accent-2: #ff6a3d;
---ok: #35d48a;
---down: #e35d6a;
---radius: 14px;
---shadow: 0 10px 30px rgba(0,0,0,.6);
-}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Campaign Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #000000;
+      --panel: #0d0d0d;
+      --panel-2: #1a1a1a;
+      --text: #f5f5f5;
+      --muted: #aaaaaa;
+      --accent: #26c6da;
+      --accent-2: #ff6a3d;
+      --ok: #35d48a;
+      --down: #e35d6a;
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(0,0,0,.6);
+    }
 
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
 
-* { box-sizing: border-box; }
-html, body { height: 100%; }
-body {
-margin: 0;
-font-family: 'Inter', sans-serif;
-background: var(--bg);
-color: var(--text);
-}
+    .app {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      grid-template-rows: 72px 1fr;
+      grid-template-areas: "sidebar topbar" "sidebar main";
+      min-height: 100vh;
+    }
 
+    aside.sidebar {
+      grid-area: sidebar;
+      background: var(--panel-2);
+      color: var(--text);
+      padding: 20px;
+      border-right: 1px solid #222;
+    }
 
-.app {
-display: grid;
-grid-template-columns: 280px 1fr;
-grid-template-rows: 72px 1fr;
-grid-template-areas: "sidebar topbar" "sidebar main";
-min-height: 100vh;
-}
+    header.topbar {
+      grid-area: topbar;
+      background: var(--panel);
+      color: var(--text);
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 24px;
+      border-bottom: 1px solid #222;
+      box-shadow: var(--shadow);
+    }
 
+    main { grid-area: main; padding: 24px; }
 
-aside.sidebar {
-grid-area: sidebar;
-background: var(--panel-2);
-color: var(--text);
-padding: 20px;
-border-right: 1px solid #222;
-}
+    .card {
+      background: var(--panel);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid #222;
+    }
 
+    .grid { display:grid; gap:16px; }
+    .stats { grid-template-columns: repeat(4, 1fr); }
 
-header.topbar {
-grid-area: topbar;
-background: var(--panel);
-color: var(--text);
-display:flex; align-items:center; justify-content:space-between;
-padding:16px 24px;
-border-bottom: 1px solid #222;
-box-shadow: var(--shadow);
-}
+    .label { color: var(--muted); font-size: 13px; }
+    .value { font-size: 26px; font-weight: 700; color: var(--text); }
 
+    .chart, .bars, .spark { background: var(--panel-2); border-radius: var(--radius); }
 
-main { grid-area: main; padding: 24px; }
+    nav ul { list-style:none; padding:0; margin-top:20px; }
+    nav li { padding:10px 0; color: var(--muted); cursor:pointer; }
+    nav li:hover { color: var(--accent); }
 
-
-.card {
-background: var(--panel);
-border-radius: var(--radius);
-padding: 16px;
-box-shadow: var(--shadow);
-border: 1px solid #222;
-}
-
-
-.grid { display:grid; gap:16px; }
-.stats { grid-template-columns: repeat(4, 1fr); }
-
-
-.label { color: var(--muted); font-size: 13px; }
-.value { font-size: 26px; font-weight: 700; color: var(--text); }
-
-
-.chart, .bars, .spark { background: var(--panel-2); border-radius: var(--radius); }
-
-
-nav ul { list-style:none; padding:0; margin-top:20px; }
-nav li { padding:10px 0; color: var(--muted); cursor:pointer; }
-nav li:hover { color: var(--accent); }
-
-
-button { background: var(--accent-2); color:white; border:none; padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:600; }
-button:hover { opacity: 0.9; }
-</style>
+    button { background: var(--accent-2); color:white; border:none; padding:10px 14px; border-radius:10px; cursor:pointer; font-weight:600; }
+    button:hover { opacity: 0.9; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
-<div class="app">
-<aside class="sidebar">
-<h2 style="color:var(--accent);">Logo</h2>
-<p>Sophia<br><small>Marketing Specialist</small></p>
-<nav>
-<ul>
-<li>Dashboard</li>
-<li>Briefs</li>
-<li>Analytics</li>
-<li>Collaboration</li>
-</ul>
-</nav>
-</aside>
+  <div class="app">
+    <aside class="sidebar">
+      <h2 style="color:var(--accent);">Logo</h2>
+      <p>Sophia<br><small>Marketing Specialist</small></p>
+      <nav>
+        <ul>
+          <li>Dashboard</li>
+          <li>Briefs</li>
+          <li>Analytics</li>
+          <li>Collaboration</li>
+        </ul>
+      </nav>
+    </aside>
 
+    <header class="topbar">
+      <h1>Campaign Dashboard</h1>
+      <button>Create New Campaign</button>
+    </header>
 
-<header class="topbar">
-<h1>Campaign Dashboard</h1>
-<button>Create New Campaign</button>
-</header>
+    <main>
+      <section class="grid stats">
+        <div class="card"><div class="label">Impressions</div><div class="value"></div></div>
+        <div class="card"><div class="label">Clicks</div><div class="value"></div></div>
+        <div class="card"><div class="label">CTR</div><div class="value"></div></div>
+        <div class="card"><div class="label">Conversions</div><div class="value"></div></div>
+      </section>
 
+      <section class="grid" style="margin-top:20px; grid-template-columns:1.4fr .9fr;">
+        <div class="card">
+          <h2>Campaign Overview</h2>
+          <div class="chart" style="height:260px; margin-top:10px; padding:12px;">
+            <canvas id="overviewChart" height="220"></canvas>
+          </div>
+          <div class="subtle" style="margin-top:6px;">Total actions in period</div>
+        </div>
 
-<main>
-<section class="grid stats">
-<div class="card"><div class="label">Impressions</div><div class="value"></div></div>
-<div class="card"><div class="label">Clicks</div><div class="value"></div></div>
-<div class="card"><div class="label">CTR</div><div class="value"></div></div>
-<div class="card"><div class="label">Conversions</div><div class="value"></div></div>
-</section>
+        <div class="card">
+          <h2>Analytics Snapshot</h2>
+          <div class="grid" style="grid-template-columns:140px 1fr; align-items:center; gap:12px; margin-top:8px;">
+            <div class="chart" style="padding:10px;">
+              <canvas id="donutChart" width="120" height="120" aria-hidden="true"></canvas>
+            </div>
+            <div>
+              <div class="value">7%</div>
+              <div class="subtle">Top creative • Audience</div>
+              <div class="legend" style="margin-top:10px;">Channel mix</div>
+              <div class="chart" style="padding:10px; margin-top:8px;">
+                <canvas id="barChart" height="100"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      <section class="grid" style="margin-top:20px; grid-template-columns:1fr 1fr 1fr;">
+        <div class="card">
+          <h2>Project Briefs</h2>
+          <div class="list" style="margin-top:8px;">
+            <div class="row"><span>Client A</span><a class="link" href="#">Use template</a></div>
+            <div class="row"><span>Client B</span><a class="link" href="#">Use template</a></div>
+            <div class="row"><span>Client C</span><a class="link" href="#">Use template</a></div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h2>Collaboration Hub</h2>
+          <div class="chat" style="margin-top:10px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div class="avatar sm">M</div>
+              <input class="input" placeholder="Type a message…" />
+            </div>
+            <div class="tag">📄 Marketing Plan.pdf</div>
+            <div class="grid two">
+              <select class="select"><option>Assign to</option><option>Sophia</option><option>Maria</option></select>
+              <select class="select"><option>Deadline</option><option>Today</option><option>This week</option><option>This month</option></select>
+            </div>
+          </div>
+        </div>
 
-<section class="grid" style="margin-top:20px; grid-template-columns:1.4fr .9fr;">
-<div class="card">
-<h2>Campaign Overview</h2>
-<div class="chart" style="height:220px; margin-top:10px; background:linear-gradient(180deg,#111 0%,#000 100%);"></div>
-</div>
+        <div class="card">
+          <h2>Activity Feed</h2>
+          <div class="chart" style="padding:10px; margin-top:8px;">
+            <canvas id="sparkChart" height="90"></canvas>
+          </div>
+        </div>
+      </section>
+      <script>
+        // Midnight palette
+        const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#000000';
+        const panel = getComputedStyle(document.documentElement).getPropertyValue('--panel').trim() || '#0d0d0d';
+        const text = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#f5f5f5';
+        const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#26c6da';
+        const muted = getComputedStyle(document.documentElement).getPropertyValue('--muted').trim() || '#aaaaaa';
 
+        // Global chart defaults
+        Chart.defaults.color = text;
+        Chart.defaults.font.family = 'Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif';
+        Chart.defaults.responsive = true;
+        Chart.defaults.maintainAspectRatio = false;
+        const gridColor = 'rgba(255,255,255,0.08)';
 
-<div class="card">
-<h2>Collaboration Hub</h2>
-<div class="bars" style="height:120px; margin-top:10px;"></div>
-</div>
-</section>
+        // Overview (area/line) chart
+        const overviewCtx = document.getElementById('overviewChart');
+        if (overviewCtx) {
+          new Chart(overviewCtx, {
+            type: 'line',
+            data: {
+              labels: ['W1','W2','W3','W4','W5','W6','W7','W8','W9','W10','W11'],
+              datasets: [{
+                data: [12,10,14,13,18,16,24,22,27,25,30],
+                fill: true,
+                backgroundColor: 'rgba(38,198,218,0.25)',
+                borderColor: accent,
+                tension: 0.35,
+                pointRadius: 0
+              }]
+            },
+            options: {
+              plugins: { legend: { display: false }, tooltip: { enabled: true } },
+              scales: {
+                x: { grid: { color: gridColor }, ticks: { color: muted } },
+                y: { grid: { color: gridColor }, ticks: { color: muted }, suggestedMin: 0 }
+              }
+            }
+          });
+        }
 
+        // Donut chart
+        const donutCtx = document.getElementById('donutChart');
+        if (donutCtx) {
+          new Chart(donutCtx, {
+            type: 'doughnut',
+            data: {
+              labels: ['Social','Search','Email','Other'],
+              datasets: [{
+                data: [48, 28, 14, 10],
+                backgroundColor: [accent, '#4dd0e1', '#80deea', '#b2ebf2'],
+                borderColor: panel,
+                borderWidth: 2
+              }]
+            },
+            options: {
+              plugins: { legend: { display: false } },
+              cutout: '68%'
+            }
+          });
+        }
 
-<section class="grid" style="margin-top:20px; grid-template-columns:1fr 1fr 1fr;">
-<div class="card"><h2>Project Briefs</h2></div>
-<div class="card"><h2>Analytics Snapshot</h2></div>
-<div class="card"><h2>Activity Feed</h2></div>
-</section>
-</main>
-</div>
+        // Bar chart (channel mix)
+        const barCtx = document.getElementById('barChart');
+        if (barCtx) {
+          new Chart(barCtx, {
+            type: 'bar',
+            data: {
+              labels: ['Ch1','Ch2','Ch3','Ch4','Ch5'],
+              datasets: [{
+                data: [12, 38, 22, 31, 15],
+                backgroundColor: accent,
+                borderRadius: 6,
+                borderSkipped: false
+              }]
+            },
+            options: {
+              plugins: { legend: { display: false } },
+              scales: {
+                x: { grid: { display: false }, ticks: { color: muted } },
+                y: { grid: { color: gridColor }, ticks: { color: muted }, suggestedMax: 40 }
+              }
+            }
+          });
+        }
+
+        // Sparkline (activity)
+        const sparkCtx = document.getElementById('sparkChart');
+        if (sparkCtx) {
+          new Chart(sparkCtx, {
+            type: 'line',
+            data: {
+              labels: Array.from({length: 24}, (_, i) => i+1),
+              datasets: [{
+                data: [4,9,6,12,7,15,10,18,11,17,12,22,14,20,13,24,16,19,15,23,14,18,13,17],
+                borderColor: accent,
+                backgroundColor: 'rgba(38,198,218,0.15)',
+                fill: true,
+                pointRadius: 0,
+                tension: 0.35
+              }]
+            },
+            options: {
+              plugins: { legend: { display: false }, tooltip: { enabled: false } },
+              scales: {
+                x: { display: false },
+                y: { display: false }
+              }
+            }
+          });
+        }
+      </script>
+    </main>
+  </div>
 </body>
 </html>
